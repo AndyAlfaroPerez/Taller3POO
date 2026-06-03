@@ -1,5 +1,7 @@
 package logica;
 
+import dominio.HechizoFuego;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -15,18 +17,42 @@ public class Main {
 		System.out.println("Hechizos cargados: " + sistema.getHechizos().size());
 
 		System.out.println("Magos cargados: " + sistema.getMagos().size());
-		
+
 		System.out.println("Puntaje primer hechizo: " + sistema.getHechizos().get(0).calcularPuntaje());
-		
+
 		System.out.println("Puntaje primer mago: " + sistema.getMagos().get(0).calcularPuntaje());
-		
+
 		System.out.println();
-		 
+
 		sistema.top10Hechizos();
 
 		System.out.println();
 
 		sistema.top3Magos();
+
+		sistema.mostrarMagos();
+
+		sistema.agregarMago("Pedro");
+
+		sistema.modificarMago("Pedro", "PedroNuevo");
+
+		sistema.eliminarMago("PedroNuevo");
+
+		sistema.mostrarMagos();
+
+		sistema.mostrarHechizos();
+		
+		sistema.mostrarHechizos();
+
+		sistema.agregarHechizo(new HechizoFuego("PedroFuego", 50, 3));
+
+		sistema.modificarHechizo("PedroFuego", "PedroFuego2", 100);
+
+		sistema.eliminarHechizo("PedroFuego2");
+
+		sistema.mostrarHechizos();
+
+		
 	}
 
 }

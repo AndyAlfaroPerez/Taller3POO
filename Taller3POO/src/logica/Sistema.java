@@ -206,7 +206,7 @@ public class Sistema {
 		for (int posicion = 1; posicion <= 10; posicion++) {
 
 			if (top.size() == 0) {
-			    break;
+				break;
 			}
 
 			Hechizo mejor = top.get(0);
@@ -254,4 +254,175 @@ public class Sistema {
 		}
 	}
 
+	// Convierte un mago al formato usado en Magos.txt
+	private String convertirMagoATexto(Mago mago) {
+
+		String texto = mago.getNombre() + ";";
+
+		for (int i = 0; i < mago.getHechizos().size(); i++) {
+
+			texto += mago.getHechizos().get(i).getNombre();
+
+			if (i < mago.getHechizos().size() - 1) {
+				texto += "|";
+			}
+		}
+
+		return texto;
+	}
+
+	// Guarda todos los magos en el archivo txt
+	public void guardarMagos() {
+
+		try {
+
+			BufferedWriter escritor = new BufferedWriter(new FileWriter("Magos.txt"));
+
+			for (Mago mago : magos) {
+
+				escritor.write(convertirMagoATexto(mago));
+				escritor.newLine();
+			}
+
+			escritor.close();
+
+		} catch (IOException e) {
+
+			System.out.println("Error al guardar");
+		}
+	}
+	
+	// Agrega un nuevo mago al sistema
+	public void agregarMago(String nombre) {
+
+		if (buscarMago(nombre) != null) {
+
+			System.out.println("El mago ya existe");
+			return;
+		}
+
+		Mago mago = new Mago(nombre);
+
+		magos.add(mago);
+
+		guardarMagos();
+
+		System.out.println("Mago agregado correctamente");
+	}
+	
+	// Modifica el nombre de un mago existente
+	public void modificarMago(String nombreActual, String nuevoNombre) {
+
+		Mago mago = buscarMago(nombreActual);
+
+		if (mago == null) {
+
+			System.out.println("Mago no encontrado");
+			return;
+		}
+
+		mago.setNombre(nuevoNombre);
+
+		guardarMagos();
+
+		System.out.println("Mago modificado correctamente");
+	}
+	
+	// Elimina un mago del sistema
+	public boolean eliminarMago(String nombre) {
+
+		Mago mago = buscarMago(nombre);
+
+		if (mago != null) {
+
+			magos.remove(mago);
+
+			guardarMagos();
+
+			return true;
+		}
+
+		return false;
+	}
+	
+	// Convierte un hechizo al formato usado en Hechizos.txt
+	private String convertirHechizoATexto(Hechizo hechizo) {
+
+		return hechizo.convertirATexto();
+	}
+	
+	// Guarda todos los hechizos en el archivo txt
+	public void guardarHechizos() {
+
+		try {
+
+			BufferedWriter escritor = new BufferedWriter(new FileWriter("Hechizos.txt"));
+
+			for (Hechizo hechizo : hechizos) {
+
+				escritor.write(convertirHechizoATexto(hechizo));
+				escritor.newLine();
+			}
+
+			escritor.close();
+
+		} catch (IOException e) {
+
+			System.out.println("Error al guardar");
+		}
+	}
+	
+	// Agrega un nuevo hechizo al sistema
+	public void agregarHechizo(Hechizo hechizo) {
+
+		if (buscarHechizo(hechizo.getNombre()) != null) {
+
+			System.out.println("El hechizo ya existe");
+			return;
+		}
+
+		hechizos.add(hechizo);
+
+		guardarHechizos();
+
+		System.out.println("Hechizo agregado correctamente");
+	}
+	
+	// Modifica el nombre y daño de un hechizo
+	public void modificarHechizo(String nombreActual, String nuevoNombre, int nuevoDaño) {
+
+		Hechizo hechizo = buscarHechizo(nombreActual);
+
+		if (hechizo == null) {
+
+			System.out.println("Hechizo no encontrado");
+			return;
+		}
+
+		hechizo.setNombre(nuevoNombre);
+		hechizo.setDaño(nuevoDaño);
+
+		guardarHechizos();
+
+		System.out.println("Hechizo modificado correctamente");
+	}
+	
+	// Elimina un hechizo del sistema
+	public boolean eliminarHechizo(String nombre) {
+
+		Hechizo hechizo = buscarHechizo(nombre);
+
+		if (hechizo != null) {
+
+			hechizos.remove(hechizo);
+
+			guardarHechizos();
+
+			return true;
+		}
+
+		return false;
+	}
+	
+	
 }
