@@ -159,4 +159,99 @@ public class Sistema {
 			System.out.println("No se encontró Magos.txt");
 		}
 	}
+
+	// Muestra todos los hechizos registrados
+	public void mostrarHechizos() {
+
+		for (Hechizo hechizo : hechizos) {
+
+			System.out.println(hechizo.getNombre());
+		}
+	}
+
+	// Muestra todos los magos registrados
+	public void mostrarMagos() {
+
+		for (Mago mago : magos) {
+
+			System.out.println(mago.getNombre());
+		}
+	}
+
+	// Muestra cada hechizo junto a su puntaje
+	public void mostrarHechizosConPuntaje() {
+
+		for (Hechizo hechizo : hechizos) {
+
+			System.out.println(hechizo.getNombre() + " -> " + hechizo.calcularPuntaje());
+		}
+	}
+
+	// Muestra cada mago junto a su puntaje
+	public void mostrarMagosConPuntaje() {
+
+		for (Mago mago : magos) {
+
+			System.out.println(mago.getNombre() + " -> " + mago.calcularPuntaje());
+		}
+	}
+
+	// Muestra los 10 hechizos con mayor puntaje
+	public void top10Hechizos() {
+
+		ArrayList<Hechizo> top = new ArrayList<>(hechizos);
+
+		System.out.println("TOP 10 HECHIZOS");
+
+		for (int posicion = 1; posicion <= 10; posicion++) {
+
+			if (top.size() == 0) {
+			    break;
+			}
+
+			Hechizo mejor = top.get(0);
+
+			for (Hechizo hechizo : top) {
+
+				if (hechizo.calcularPuntaje() > mejor.calcularPuntaje()) {
+
+					mejor = hechizo;
+				}
+			}
+
+			System.out.println(posicion + ". " + mejor.getNombre() + " -> " + mejor.calcularPuntaje());
+
+			top.remove(mejor);
+		}
+	}
+
+	// Muestra los 3 magos con mayor puntaje
+	public void top3Magos() {
+
+		ArrayList<Mago> top = new ArrayList<>(magos);
+
+		System.out.println("TOP 3 MAGOS");
+
+		for (int posicion = 1; posicion <= 3; posicion++) {
+
+			if (top.size() == 0) {
+				break;
+			}
+
+			Mago mejor = top.get(0);
+
+			for (Mago mago : top) {
+
+				if (mago.calcularPuntaje() > mejor.calcularPuntaje()) {
+
+					mejor = mago;
+				}
+			}
+
+			System.out.println(posicion + ". " + mejor.getNombre() + " -> " + mejor.calcularPuntaje());
+
+			top.remove(mejor);
+		}
+	}
+
 }
