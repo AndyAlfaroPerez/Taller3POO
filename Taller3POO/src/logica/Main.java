@@ -1,3 +1,9 @@
+//Taller 3 POO 
+//Andy Alejandro Alfaro Perez 
+//21.918.973-7
+//ICCI
+//GitHub: "AndyAlfaroPerez"  
+
 package logica;
 
 import java.util.Scanner;
